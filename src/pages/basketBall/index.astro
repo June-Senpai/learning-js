@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div>
+        <h3>HOME</h3>
+        <h2 id="home-score">12</h2>
+        <button id="home-score-one-plus">1+</button>
+        <button id="home-score-two-plus">2+</button>
+        <button id="home-score-three-plus">3+</button>
+      </div>
+      <button id="new-game">New Game</button>
+      <div>
+        <h3>GUEST</h3>
+        <h2 id="guest-score">5</h2>
+        <button id="guest-score-one-plus">1+</button>
+        <button id="guest-score-two-plus">2+</button>
+        <button id="guest-score-three-plus">3+</button>
+      </div>
+    </div>
+    <script src="../../components/basketBall.js"></script>
+  </body>
+</html>
+
+<style>
+  body {
+    margin: 0;
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-around;
+  }
+</style>
