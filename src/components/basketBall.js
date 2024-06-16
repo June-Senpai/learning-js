@@ -1,73 +1,84 @@
 let homeScoreScreen = document.getElementById("home-score")
 let guestScoreScreen = document.getElementById("guest-score")
 
+let homeFoulScreen = document.getElementById("home-foul")
+let guestFoulScreen = document.getElementById("guest-foul")
+
 let homeScore = 12
 let guestScore = 5
 
-function updateScore(team) {
-  switch (team) {
-    case "forHome1": {
-      homeScore += 1
-      homeScoreScreen.textContent = homeScore
-      break
-    }
-    case "forHome2": {
-      homeScore += 2
-      homeScoreScreen.textContent = homeScore
-      break
-    }
-    case "forHome3": {
-      homeScore += 3
-      homeScoreScreen.textContent = homeScore
-      break
-    }
-    case "forGuest1": {
-      guestScore += 1
-      guestScoreScreen.textContent = guestScore
-      break
-    }
-    case "forGuest2": {
-      guestScore += 2
-      guestScoreScreen.textContent = guestScore
-      break
-    }
-    case "forGuest3": {
-      guestScore += 3
-      guestScoreScreen.textContent = guestScore
-      break
-    }
-    default: {
-      console.error("tada")
-      break
-    }
+let homeFoul = 0
+let guestFoul = 0
+
+function updateScreen() {
+  homeScoreScreen.textContent = homeScore
+  guestScoreScreen.textContent = guestScore
+  homeFoulScreen.textContent = `Home Foul: ${homeFoul}`
+  guestFoulScreen.textContent = `Guest Foul: ${guestFoul}`
+  winningTeam()
+}
+
+function updateScore(team, points) {
+  if (team === "home") {
+    homeScore += points
+  } else {
+    guestScore += points
   }
+  updateScreen()
 }
 
 function newGame() {
   homeScore = 0
   guestScore = 0
-  guestScoreScreen.textContent = 0
-  homeScoreScreen.textContent = 0
+  homeFoul = 0
+  guestFoul = 0
+  updateScreen()
 }
+
+function winningTeam() {
+  if (homeScore > guestScore) {
+    homeScoreScreen.classList.add("winning")
+    guestScoreScreen.classList.remove("winning")
+  } else if (homeScore < guestScore) {
+    guestScoreScreen.classList.add("winning")
+    homeScoreScreen.classList.remove("winning")
+  } else {
+    homeScoreScreen.classList.remove("winning")
+    guestScoreScreen.classList.remove("winning")
+  }
+}
+function fouls(team) {
+  if (team === "home") {
+    homeFoul += 1
+    homeFoulScreen.textContent = `Home Foul: ${homeFoul}`
+  } else {
+    guestFoul += 1
+    guestFoulScreen.textContent = `Guest Foul: ${guestFoul}`
+  }
+}
+
+updateScreen()
 
 document
   .getElementById("home-score-one-plus")
-  ?.addEventListener("click", () => updateScore("forHome1"))
+  ?.addEventListener("click", () => updateScore("home", 1))
 document
   .getElementById("home-score-two-plus")
-  ?.addEventListener("click", () => updateScore("forHome2"))
+  ?.addEventListener("click", () => updateScore("home", 2))
 document
   .getElementById("home-score-three-plus")
-  ?.addEventListener("click", () => updateScore("forHome3"))
+  ?.addEventListener("click", () => updateScore("home", 3))
 document
   .getElementById("guest-score-one-plus")
-  ?.addEventListener("click", () => updateScore("forGuest1"))
-
+  ?.addEventListener("click", () => updateScore("guest", 1))
 document
   .getElementById("guest-score-two-plus")
-  ?.addEventListener("click", () => updateScore("forGuest2"))
+  ?.addEventListener("click", () => updateScore("guest", 2))
 document
   .getElementById("guest-score-three-plus")
-  ?.addEventListener("click", () => updateScore("forGuest3"))
+  ?.addEventListener("click", () => updateScore("guest", 3))
 
 document.getElementById("new-game").addEventListener("click", () => newGame())
+
+document.getElementById("home-foul-btn").addEventListener("click", () => fouls("home"))
+document.getElementById("guest-foul-btn").addEventListener("click", () => fouls("guest"))
