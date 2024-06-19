@@ -1,0 +1,60 @@
+---
+import Layout from "../../layouts/Layout.astro"
+---
+
+<Layout title="Welcome to Astro.">
+  <html>
+    <body>
+      <div class="container">
+        <div>
+          <h3>HOME</h3>
+          <h2 id="home-score">12</h2>
+          <button id="home-score-one-plus">1+</button>
+          <button id="home-score-two-plus">2+</button>
+          <button id="home-score-three-plus">3+</button>
+          <button id="home-foul-btn">Foul</button>
+        </div>
+        <div class="time-box">
+          <div>
+            <h2 id="time">Time: 60:00</h2>
+          </div>
+          <button id="new-game">New Game</button>
+          <h3 id="home-foul">Home Foul: 0</h3>
+          <h3 id="guest-foul">Guest Foul:0</h3>
+        </div>
+        <div>
+          <h3>GUEST</h3>
+          <h2 id="guest-score">5</h2>
+          <button id="guest-score-one-plus">1+</button>
+          <button id="guest-score-two-plus">2+</button>
+          <button id="guest-score-three-plus">3+</button>
+          <button id="guest-foul-btn">Foul</button>
+        </div>
+      </div>
+      <script src="../../components/js/basketBall.js"></script>
+    </body>
+  </html>
+</Layout>
+
+<style>
+  body {
+    margin: 0;
+  }
+
+  .container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .winning {
+    background: red;
+  }
+  #time {
+    margin-top: 30px;
+  }
+  .time-box {
+    display: flex;
+    gap: 1.35rem;
+    flex-direction: column;
+  }
+</style>

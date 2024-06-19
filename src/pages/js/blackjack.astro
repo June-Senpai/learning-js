@@ -1,0 +1,87 @@
+---
+import Layout from "../../layouts/Layout.astro"
+---
+
+<Layout title="blackjack">
+  <div class="flex gap-10 flex-col items-center justify-center h-screen">
+    <h1>BlackJack</h1>
+    <h3 id="cards-el">Cards:</h3>
+    <h3 id="sum-el">Sum:</h3>
+    <p id="description-el"></p>
+    <button id="new-start-game-btn" class="hidden">Start New Game</button>
+    <button id="start-game-btn">Start Game</button>
+    <button id="new-card-btn" class="hidden">New Card</button>
+  </div>
+</Layout>
+
+<script>
+  let sumEl = document.getElementById("sum-el")
+  let cardsEl = document.getElementById("cards-el")
+  let startGameBtn = document.getElementById("start-game-btn")
+  let newCardBtn = document.getElementById("new-card-btn")
+  let descriptionEl = document.getElementById("description-el")
+  let newStartGamebtn = document.getElementById("new-start-game-btn")
+
+  let cards = []
+  let sum = 0
+
+  function randomCard() {
+    let random = Math.floor(Math.random() * 13 + 1)
+    return random
+  }
+
+  function render() {
+    if (sum < 21) {
+      descriptionEl.textContent = "Do you want to draw another card"
+      newCardBtn.classList.remove("hidden")
+    } else if (sum === 21) {
+      descriptionEl.textContent = "You win"
+      newCardBtn.classList.add("hidden")
+      startGameBtn.classList.add("hidden")
+      newStartGamebtn.classList.remove("hidden")
+    } else if (sum > 21) {
+      descriptionEl.textContent = "You lost"
+      newCardBtn.classList.add("hidden")
+      startGameBtn.classList.add("hidden")
+      newStartGamebtn.classList.remove("hidden")
+    }
+  }
+
+  function startGameFn() {
+    let card1 = randomCard()
+    let card2 = randomCard()
+    cards = [card1, card2]
+    cardsEl.textContent += " " + card1 + " " + card2
+    sum = card1 + card2
+    sumEl.textContent += " " + sum
+    startGameBtn.classList.add("hidden")
+    render()
+  }
+
+  function newCardFn() {
+    let card3 = randomCard()
+    sum += card3
+    cardsEl.textContent += " " + card3
+    sumEl.textContent = "Sum: " + sum
+    render()
+  }
+
+  function newGameFn() {
+    sum = 0
+    sumEl.textContent = "Sum: "
+    cards = []
+    cardsEl.textContent = "Cards: "
+    newStartGamebtn.classList.add("hidden")
+    startGameBtn.classList.remove("hidden")
+  }
+
+  newStartGamebtn.addEventListener("click", newGameFn)
+  startGameBtn.addEventListener("click", startGameFn)
+  newCardBtn.addEventListener("click", newCardFn)
+</script>
+
+<style>
+  .hidden {
+    display: none;
+  }
+</style>

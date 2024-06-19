@@ -1,11 +1,11 @@
 let homeScoreScreen = document.getElementById("home-score")
 let guestScoreScreen = document.getElementById("guest-score")
 
-let homeFoulScreen = document.getElementById("home-foul")
-let guestFoulScreen = document.getElementById("guest-foul")
-
 let homeScore = 12
 let guestScore = 5
+
+let homeFoulScreen = document.getElementById("home-foul")
+let guestFoulScreen = document.getElementById("guest-foul")
 
 let homeFoul = 0
 let guestFoul = 0
@@ -33,6 +33,8 @@ function newGame() {
   homeFoul = 0
   guestFoul = 0
   updateScreen()
+  resetTime()
+  startTimer()
 }
 
 function winningTeam() {
@@ -55,6 +57,37 @@ function fouls(team) {
     guestFoul += 1
     guestFoulScreen.textContent = `Guest Foul: ${guestFoul}`
   }
+}
+
+let countDownEl = document.getElementById("time")
+let startingMinutes = 60
+let time = startingMinutes * 60 //so that we get all the secs
+let intervalId
+
+function startTimer() {
+  intervalId = setInterval(() => {
+    countDown()
+  }, 1000)
+}
+
+function countDown() {
+  //if condition because time was going negative
+  if (time <= 0) {
+    clearInterval(intervalId)
+    countDownEl.textContent = `Time: 0:00`
+  }
+  let minutes = Math.floor(time / 60) //to convert it to minutes
+  let seconds = time % 60 //so tat we get seconds
+
+  seconds = seconds < 10 ? "0" + seconds : seconds
+
+  countDownEl.textContent = `Time: ${minutes}:${seconds}`
+  time--
+}
+
+function resetTime() {
+  clearInterval(intervalId)
+  time = startingMinutes * 60 // Reset the time to the starting value
 }
 
 updateScreen()
