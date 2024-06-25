@@ -1,0 +1,45 @@
+---
+import Layout from "../../layouts/Layout.astro"
+---
+
+<Layout title="convert">
+  <div class="flex flex-col items-center justify-center h-screen gap-5">
+    <h1>Metric/Imerpial Unit conversion</h1>
+    <input type="number" min="0" id="input-el" class="text-black p-2 w-32" />
+    <button id="convert-btn">Convert</button>
+    <h2>Length(Meter/Feet)</h2>
+    <p id="meter-el"></p>
+    <h2>Volume(Liters/Gallons)</h2>
+    <p id="volume-el"></p>
+    <h2>Mass(Kilograms/Pounds)</h2>
+    <p id="mass-el"></p>
+  </div>
+</Layout>
+
+<script>
+  const convertBtn = document.getElementById("convert-btn")
+  const inputEl = document.getElementById("input-el") as HTMLInputElement
+
+  const meterEl = document.getElementById("meter-el")
+  const volumeEl = document.getElementById("volume-el")
+  const massEl = document.getElementById("mass-el")
+
+  function convert() {
+    let value = parseFloat(inputEl.value)
+    const feet = (value * 3.281).toFixed(3)
+    const meters = (value / 3.281).toFixed(3)
+
+    const liters = (value * 0.264).toFixed(3)
+    const gallon = (value / 0.264).toFixed(3)
+
+    const kilo = (value * 2.204).toFixed(3)
+    const pound = (value / 2.204).toFixed(3)
+
+    meterEl.textContent = `${value} meters = ${feet} feet | ${value} feet = ${meters} meters`
+    volumeEl.textContent = `${value} liters = ${liters} gallon | ${value} feet = ${gallon} liters`
+    massEl.textContent = `${value} kilos = ${kilo} pounds | ${value} pounds = ${pound} kilos`
+  }
+
+  convertBtn.addEventListener("click", convert)
+  /* 1 meter = 3.281 feet 1 liter = 0.264 gallon 1 kilogram = 2.204 pound */
+</script>
