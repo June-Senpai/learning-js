@@ -3,12 +3,35 @@ import Layout from "../../layouts/Layout.astro"
 ---
 
 <Layout title="Welcome to Astro.">
-  <h1>Starting with js</h1>
-
-  <h2>Counter with previous counts </h2>
-  <p id="count">0</p>
-  <button id="btn-increase">Increase</button>
-  <button id="save-count">Save</button>
-  <p id="saved-value">Previous counts: </p>
+  <div class="container">
+    <div class="border">
+      <h1>Counter with previous counts </h1>
+      <p id="count">0</p>
+      <div>
+        <button id="btn-increase">Increase</button>
+        <button id="save-count">Save</button>
+      </div>
+      <p id="saved-value">Previous counts: </p>
+    </div>
+  </div>
   <script src="../../components/js/javascript.js"></script>
 </Layout>
+
+<style>
+  .container {
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+  }
+  .border {
+    flex-direction: column;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 2px solid white;
+    align-items: center;
+    padding: 30px;
+  }
+</style>

@@ -1,0 +1,35 @@
+---
+import Layout from "../../layouts/Layout.astro"
+---
+
+<Layout title="duplicates removal in an array without using any build in methods">
+  <div><h1>duplicates removal in an array without using any build in methods</h1> </div>
+</Layout>
+
+<script>
+  function removeDuplicates(arr) {
+    let uniqueArr = []
+
+    for (let i = 0; i < arr.length; i++) {
+      let isDuplicate = false
+
+      for (let j = 0; j < uniqueArr.length; j++) {
+        if (arr[i] === uniqueArr[j]) {
+          isDuplicate = true
+          break
+        }
+      }
+
+      if (!isDuplicate) {
+        uniqueArr.push(arr[i])
+      }
+    }
+
+    return uniqueArr
+  }
+
+  let originalArray = [1, 2, 2, 3, 4, 4, 5]
+  let uniqueArray = removeDuplicates(originalArray)
+  console.log(originalArray)
+  console.log(uniqueArray)
+</script>
